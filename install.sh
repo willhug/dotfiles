@@ -8,7 +8,7 @@
 
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" # Gets the directory this script is stored in (with the other dotfiles)
 olddir=~/dotfiles_backup  # old dotfiles backup directory
-dotfiles="bash_profile gitconfig gitignore vimrc"    # list of files/folders to symlink in homedir
+dotfiles="bash_profile gitconfig gitignore inputrc vimrc"    # list of files/folders to symlink in homedir
 
 ##########
 
