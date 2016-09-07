@@ -1,5 +1,3 @@
-# DO NOT MODIFY THIS FILE, MODIFY THE .bashrc FILE INSTEAD
-
 # Get the current install directory (For running scripts)
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
@@ -9,5 +7,6 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 INSTALL_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-# Use the bashrc as the source of truth
-source $INSTALL_DIR/.bashrc
+# Load shared shell setup
+source $INSTALL_DIR/shared_shell_setup
+
