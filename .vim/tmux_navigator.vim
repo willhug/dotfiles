@@ -11,33 +11,6 @@ if !exists("g:tmux_navigator_save_on_switch")
   let g:tmux_navigator_save_on_switch = 0
 endif
 
-function! s:TmuxOrTmateExecutable()
-  return (match($TMUX, 'tmate') != -1 ? 'tmate' : 'tmux')
-endfunction
-
-function! s:UseTmuxNavigatorMappings()
-  return !get(g:, 'tmux_navigator_no_mappings', 0)
-endfunction
-
-function! s:InTmuxSession()
-  return $TMUX != ''
-endfunction
-
-function! s:TmuxSocket()
-  " The socket path is the first value in the comma-separated list of $TMUX.
-  return split($TMUX, ',')[0]
-endfunction
-
-function! s:TmuxCommand(args)
-  let cmd = s:TmuxOrTmateExecutable() . ' -S ' . s:TmuxSocket() . ' ' . a:args
-  return system(cmd)
-endfunction
-
-function! s:TmuxPaneCurrentCommand()
-  echo s:TmuxCommand("display-message -p '#{pane_current_command}'")
-endfunction
-command! TmuxPaneCurrentCommand call s:TmuxPaneCurrentCommand()
-
 let s:tmux_is_last_pane = 0
 augroup tmux_navigator
   au!
@@ -53,8 +26,8 @@ function! s:TmuxWinCmd(direction)
   endif
 endfunction
 
-function! s:NeedsVitalityRedraw()
-  return exists('g:loaded_vitality') && v:version < 704 && !has("patch481")
+function! s:InTmuxSession()
+  return $TMUX != ''
 endfunction
 
 function! s:TmuxAwareNavigate(direction)
@@ -96,6 +69,33 @@ function! s:VimNavigate(direction)
     echohl ErrorMsg | echo 'E11: Invalid in command-line window; <CR> executes, CTRL-C quits: wincmd k' | echohl None
   endtry
 endfunction
+
+function! s:TmuxCommand(args)
+  let cmd = s:TmuxOrTmateExecutable() . ' -S ' . s:TmuxSocket() . ' ' . a:args
+  return system(cmd)
+endfunction
+
+function! s:TmuxOrTmateExecutable()
+  return (match($TMUX, 'tmate') != -1 ? 'tmate' : 'tmux')
+endfunction
+
+function! s:TmuxSocket()
+  " The socket path is the first value in the comma-separated list of $TMUX.
+  return split($TMUX, ',')[0]
+endfunction
+
+function! s:NeedsVitalityRedraw()
+  return exists('g:loaded_vitality') && v:version < 704 && !has("patch481")
+endfunction
+
+function! s:UseTmuxNavigatorMappings()
+  return !get(g:, 'tmux_navigator_no_mappings', 0)
+endfunction
+
+function! s:TmuxPaneCurrentCommand()
+  echo s:TmuxCommand("display-message -p '#{pane_current_command}'")
+endfunction
+command! TmuxPaneCurrentCommand call s:TmuxPaneCurrentCommand()
 
 command! TmuxNavigateLeft call s:TmuxWinCmd('h')
 command! TmuxNavigateDown call s:TmuxWinCmd('j')
