@@ -1,0 +1,3 @@
+#Shared bash and ZSH commands
+export GOPATH=$HOME/go_workspace
+alias lg='git lg'
