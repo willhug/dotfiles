@@ -5,4 +5,24 @@ promptinit
 # Prepare colors for the prompt
 autoload -Uz colors && colors
 
-PROMPT="%{$fg_bold[green]%}%n%{$reset_color%} %#>"
+# Time info
+PROMPT_TIME_COLOR="%{$fg_bold[cyan]%}"
+PROMPT_DAY_OF_THE_YEAR_SRC="%D{%a %b %d, %Y}"
+PROMPT_TIME_IN_SECONDS_SRC="%*"
+PROMPT_DATETIME="$PROMPT_TIME_COLOR""$PROMPT_DAY_OF_THE_YEAR_SRC T$PROMPT_TIME_IN_SECONDS_SRC"
+
+# User info
+PROMPT_USERNAME_COLOR="%{$fg_bold[magenta]%}"
+PROMPT_USERNAME_SRC="%n"
+PROMPT_USERNAME="$PROMPT_USERNAME_COLOR""$PROMPT_USERNAME_SRC"
+
+# Path info
+PROMPT_PATH_COLOR="%{$fg_bold[green]%}"
+PROMPT_PATH_SRC="%d"
+PROMPT_PATH="$PROMPT_PATH_COLOR""$PROMPT_PATH_SRC"
+
+# Prompt utilities
+PROMPT_DIVIDER="%{$fg_bold[cyan]%}:"
+PROMPT_SHELL="%{$reset_color%} %# "
+
+PROMPT="$PROMPT_DATETIME ""$PROMPT_USERNAME""$PROMPT_DIVIDER""$PROMPT_PATH""$PROMPT_SHELL"
