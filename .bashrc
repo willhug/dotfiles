@@ -5,8 +5,8 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
   SOURCE="$(readlink "$SOURCE")"
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
 done
-INSTALL_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+export DOTFILES_INSTALL_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 # Load shared shell setup
-source $INSTALL_DIR/shared_shell_setup
+source $DOTFILES_INSTALL_DIR/shared_shell_setup
 

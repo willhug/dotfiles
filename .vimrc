@@ -60,4 +60,4 @@ set smartcase       " ...unless we type a capital
 
 " ================ Plugins ==========================
 
-source .vim/tmux_navigator.vim " Allow vim and tmux splits to be switched between effortlessly
+source $DOTFILES_INSTALL_DIR/.vim/tmux_navigator.vim " Allow vim and tmux splits to be switched between effortlessly
