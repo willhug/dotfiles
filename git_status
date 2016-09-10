@@ -1,0 +1,44 @@
+in_git_repo() {
+  local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
+  if [ $GIT_DIR ]; then
+    echo 1
+  fi
+}
+
+git_branch() {
+  (git symbolic-ref --short -q HEAD || git rev-parse --abbrev-ref HEAD) 2> /dev/null
+}
+
+#---------------COMMIT STATUS---------------
+
+git_in_merge() {
+  local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
+  if [ $GIT_DIR ] && test -r $GIT_DIR/MERGE_HEAD; then
+    echo 1
+  fi
+}
+
+git_in_rebase() {
+  local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
+    if [ -d "$GIT_DIR/rebase-merge" ]; then
+      echo 1
+    fi
+}
+
+git_number_of_stashes() {
+  git stash list 2> /dev/null | wc -l | tr -d ' '
+}
+
+#---------------FILE STATUS---------------
+
+git_untracked_files() {
+  git ls-files --other --exclude-standard 2> /dev/null | wc -l | tr -d ' '
+}
+
+git_modified_files() {
+  git diff --name-only 2> /dev/null | wc -l | tr -d ' '
+}
+
+git_staged_files() {
+  git diff --staged --name-only 2> /dev/null | wc -l | tr -d ' '
+}

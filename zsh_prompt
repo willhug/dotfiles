@@ -25,4 +25,64 @@ PROMPT_PATH="$PROMPT_PATH_COLOR""$PROMPT_PATH_SRC"
 PROMPT_DIVIDER="%{$fg_bold[white]%}:"
 PROMPT_SHELL="%{$reset_color%} %# "
 
-PROMPT="$PROMPT_DATETIME ""$PROMPT_USERNAME""$PROMPT_DIVIDER""$PROMPT_PATH""$PROMPT_SHELL"
+# Git info
+source $DOTFILES_INSTALL_DIR/git_status
+
+PROMPT_GIT_BRANCH_PREFIX=" %{$fg_bold[white]%}("
+PROMPT_GIT_BRANCH_SUFFIX="%{$fg_bold[white]%}) "
+PROMPT_GIT_COMMITS_PREFIX="%{$fg_bold[blue]%}"
+PROMPT_GIT_COMMITS_SUFFIX="%{$fg_bold[blue]%}"
+PROMPT_GIT_FILES_PREFIX="%{$fg_bold[cyan]%}"
+PROMPT_GIT_FILES_SUFFIX="%{$fg_bold[cyan]%}"
+PROMPT_GIT_IN_MERGE="%{$fg_bold[red]%}✘"
+PROMPT_GIT_IN_REBASE="%{$fg_bold[yellow]%}✘"
+PROMPT_GIT_HAS_STASHED_COMMIT="%{$fg_bold[green]%}✘"
+PROMPT_GIT_HAS_UNTRACKED_FILES="%{$fg_bold[red]%}✓"
+PROMPT_GIT_HAS_MODIFIED_FILES="%{$fg_bold[yellow]%}✓"
+PROMPT_GIT_HAS_STAGED_FILES="%{$fg_bold[green]%}✓"
+
+get_git_prompt() {
+  if [ $(in_git_repo) ]; then
+    local GIT_PROMPT=""
+
+    # Add the git branch to the prompt
+    GIT_PROMPT="$GIT_PROMPT""$PROMPT_GIT_BRANCH_PREFIX"
+    GIT_PROMPT="$GIT_PROMPT""$(git_branch)"
+    GIT_PROMPT="$GIT_PROMPT""$PROMPT_GIT_BRANCH_SUFFIX"
+
+    # Grab the rebase/stash/merge info
+    local GIT_COMMIT_INFO_PROMPT="$PROMPT_GIT_COMMITS_PREFIX"
+    if [ $(git_in_merge) ]; then
+      GIT_COMMIT_INFO_PROMPT=$GIT_COMMIT_INFO_PROMPT"$PROMPT_GIT_IN_MERGE"
+    fi
+    if [ $(git_in_rebase) ]; then
+      GIT_COMMIT_INFO_PROMPT=$GIT_COMMIT_INFO_PROMPT"$PROMPT_GIT_IN_REBASE"
+    fi
+    if [ $(git_number_of_stashes) -gt 0 ]; then
+      GIT_COMMIT_INFO_PROMPT=$GIT_COMMIT_INFO_PROMPT"$PROMPT_GIT_HAS_STASHED_COMMIT"
+    fi
+    GIT_COMMIT_INFO_PROMPT=$GIT_COMMIT_INFO_PROMPT"$PROMPT_GIT_COMMITS_SUFFIX"
+
+    # Grab the modified/staged/untracked file info
+    local GIT_FILE_INFO_PROMPT="$PROMPT_GIT_FILES_PREFIX"
+    if [ $(git_untracked_files) -gt 0 ]; then
+      GIT_FILE_INFO_PROMPT=$GIT_FILE_INFO_PROMPT"$PROMPT_GIT_HAS_UNTRACKED_FILES"
+    fi
+    if [ $(git_modified_files) -gt 0 ]; then
+      GIT_FILE_INFO_PROMPT=$GIT_FILE_INFO_PROMPT"$PROMPT_GIT_HAS_MODIFIED_FILES"
+    fi
+    if [ $(git_staged_files) -gt 0 ]; then
+      GIT_FILE_INFO_PROMPT=$GIT_FILE_INFO_PROMPT"$PROMPT_GIT_HAS_STAGED_FILES"
+    fi
+    GIT_FILE_INFO_PROMPT=$GIT_FILE_INFO_PROMPT"$PROMPT_GIT_COMMITS_SUFFIX"
+
+    # Combine the prompts together
+    GIT_PROMPT="$GIT_PROMPT""$GIT_COMMIT_INFO_PROMPT""$GIT_FILE_INFO_PROMPT"
+    echo "$GIT_PROMPT"
+  fi
+}
+
+# Force the zsh prompt to re-run functions on render
+setopt PROMPT_SUBST
+
+PROMPT="$PROMPT_DATETIME ""$PROMPT_USERNAME""$PROMPT_DIVIDER""$PROMPT_PATH"'$(get_git_prompt)'"$PROMPT_SHELL"
