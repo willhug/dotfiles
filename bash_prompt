@@ -36,10 +36,59 @@ bakwht='\e[47m'   # White
  
 txtrst='\e[0m'    # Text Reset
 
-print_before_the_prompt () {
-  printf "$txtred%s: $bldgrn%s$txtrst" "$USER" "$PWD"
+bash_user_and_dir() {
+  printf "$txtred%s:$bldgrn%s $bldblu%s" "$USER" "$PWD"
 }
 
-PROMPT_COMMAND=print_before_the_prompt
+# Git info
+source $DOTFILES_INSTALL_DIR/git_status
 
-PS1='->'
+PROMPT_GIT_BRANCH_PREFIX="$bldwht""("
+PROMPT_GIT_BRANCH_SUFFIX="$bldwht"") "
+PROMPT_GIT_IN_MERGE="$bldred""x"
+PROMPT_GIT_IN_REBASE="$bldylw""x"
+PROMPT_GIT_HAS_STASHED_COMMIT="$bldgrn""x"
+PROMPT_GIT_HAS_UNTRACKED_FILES="$bldred""v"
+PROMPT_GIT_HAS_MODIFIED_FILES="$bldylw""v"
+PROMPT_GIT_HAS_STAGED_FILES="$bldgrn""v"
+
+# TODO: This still doesn't work, get it working
+bash_git_info() {
+  if [ $(in_git_repo) ]; then
+    local GIT_PROMPT=""
+    # Add the git branch to the prompt
+    GIT_PROMPT="$GIT_PROMPT""$PROMPT_GIT_BRANCH_PREFIX"
+    GIT_PROMPT="$GIT_PROMPT""$(git_branch)"
+    GIT_PROMPT="$GIT_PROMPT""$PROMPT_GIT_BRANCH_SUFFIX"
+
+    # Grab the rebase/stash/merge info
+    local GIT_COMMIT_INFO_PROMPT=""
+    if [ $(git_in_merge) ]; then
+      GIT_COMMIT_INFO_PROMPT=$GIT_COMMIT_INFO_PROMPT"$PROMPT_GIT_IN_MERGE"
+    fi
+    if [ $(git_in_rebase) ]; then
+      GIT_COMMIT_INFO_PROMPT=$GIT_COMMIT_INFO_PROMPT"$PROMPT_GIT_IN_REBASE"
+    fi
+    if [ $(git_number_of_stashes) -gt 0 ]; then
+      GIT_COMMIT_INFO_PROMPT=$GIT_COMMIT_INFO_PROMPT"$PROMPT_GIT_HAS_STASHED_COMMIT"
+    fi
+
+    # Grab the modified/staged/untracked file info
+    local GIT_FILE_INFO_PROMPT=""
+    if [ $(git_untracked_files) -gt 0 ]; then
+      GIT_FILE_INFO_PROMPT=$GIT_FILE_INFO_PROMPT"$PROMPT_GIT_HAS_UNTRACKED_FILES"
+    fi
+    if [ $(git_modified_files) -gt 0 ]; then
+      GIT_FILE_INFO_PROMPT=$GIT_FILE_INFO_PROMPT"$PROMPT_GIT_HAS_MODIFIED_FILES"
+    fi
+    if [ $(git_staged_files) -gt 0 ]; then
+      GIT_FILE_INFO_PROMPT=$GIT_FILE_INFO_PROMPT"$PROMPT_GIT_HAS_STAGED_FILES"
+    fi
+
+    # Combine the prompts together
+    GIT_PROMPT="$GIT_PROMPT""$GIT_COMMIT_INFO_PROMPT""$GIT_FILE_INFO_PROMPT"
+    printf "$GIT_PROMPT"
+  fi
+}
+
+PS1="$bldcyn\D{%a %b %d, %Y T%H:%M:%S} \$(bash_user_and_dir)\$(bash_git_info)$txtrst $ "

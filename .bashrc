@@ -10,3 +10,5 @@ export DOTFILES_INSTALL_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 # Load shared shell setup
 source $DOTFILES_INSTALL_DIR/shared_shell_setup
 
+# Load bash prompt
+source $DOTFILES_INSTALL_DIR/bash_prompt
