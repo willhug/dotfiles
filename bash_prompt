@@ -61,14 +61,14 @@ bash_git_branch() {
 BASH_GIT_BRANCH="$bldwht\$(bash_git_branch)"
 
 bash_git_in_merge() {
-  if [ $(in_git_repo) ] && [ $(git_in_merge)]; then
+  if [ $(in_git_repo) ] && [ $(git_in_merge) ]; then
     printf "x"
   fi
 }
 BASH_GIT_IN_MERGE="$bldred\$(bash_git_in_merge)"
 
 bash_git_in_rebase() {
-  if [ $(in_git_repo) ] && [ $(git_in_rebase)]; then
+  if [ $(in_git_repo) ] && [ $(git_in_rebase) ]; then
     printf "x"
   fi
 }
