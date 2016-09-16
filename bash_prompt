@@ -62,42 +62,42 @@ BASH_GIT_BRANCH="$bldwht\$(bash_git_branch)"
 
 bash_git_in_merge() {
   if [ $(in_git_repo) ] && [ $(git_in_merge) ]; then
-    printf "x"
+    printf "✗"
   fi
 }
 BASH_GIT_IN_MERGE="$bldred\$(bash_git_in_merge)"
 
 bash_git_in_rebase() {
   if [ $(in_git_repo) ] && [ $(git_in_rebase) ]; then
-    printf "x"
+    printf "✗"
   fi
 }
 BASH_GIT_IN_REBASE="$bldylw\$(bash_git_in_rebase)"
 
 bash_git_has_stashed_commit() {
   if [ $(in_git_repo) ] && [ $(git_number_of_stashes) -gt 0 ]; then
-    printf "x"
+    printf "✗"
   fi
 }
 BASH_GIT_HAS_STASHED_COMMIT="$bldgrn\$(bash_git_has_stashed_commit)"
 
 bash_git_has_untracked_files() {
   if [ $(in_git_repo) ] && [ $(git_untracked_files) -gt 0 ]; then
-    printf "v"
+    printf "✓"
   fi
 }
 BASH_GIT_HAS_UNTRACKED_FILES="$bldred\$(bash_git_has_untracked_files)"
 
 bash_git_has_modified_files() {
   if [ $(in_git_repo) ] && [ $(git_modified_files) -gt 0 ]; then
-    printf "v"
+    printf "✓"
   fi
 }
 BASH_GIT_HAS_MODIFIED_FILES="$bldylw\$(bash_git_has_modified_files)"
 
 bash_git_has_staged_files() {
   if [ $(in_git_repo) ] && [ $(git_staged_files) -gt 0 ]; then
-    printf "v"
+    printf "✓"
   fi
 }
 BASH_GIT_HAS_STAGED_FILES="$bldgrn\$(bash_git_has_staged_files)"
