@@ -1,3 +1,4 @@
+#! /bin/sh
 #Shared bash and ZSH commands
 export GOPATH=$HOME/go_workspace
 export PATH=$PATH:$GOPATH/bin

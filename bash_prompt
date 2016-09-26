@@ -1,3 +1,4 @@
+#! /bin/bash
 # DISCLAIMER by default, bash will count all the characters in the $PS1 variable to determine line length 
 # (including hidden characters) In order to mitigate that, we need to 'hide' the hidden characters in \[ \]
 # braces.  I couldn't find a good way to do that in functions since \[ and \] kept showing up in my prompt

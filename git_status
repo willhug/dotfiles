@@ -1,3 +1,4 @@
+#! /bin/sh
 in_git_repo() {
   local GIT_DIR="$(git rev-parse --git-dir 2> /dev/null)"
   if [ $GIT_DIR ]; then
