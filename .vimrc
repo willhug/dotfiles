@@ -58,6 +58,23 @@ set hlsearch        " Highlight searches by default
 set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
 
+" ================ Persistent Undo ======================
+
+let vimDir = '$HOME/.vim_local'
+let &runtimepath.=','.vimDir " Add the vimDir to the vim runtimepath
+
+if has('persistent_undo') " has persistent undo installed
+    let myUndoDir = expand(vimDir . '/undodir')
+
+    " Create the directory for storing the undo stack
+    call system('mkdir -p ' . vimDir)
+    call system('mkdir -p ' . myUndoDir)
+
+    " set the vim variables for persistent undo
+    let &undodir = myUndoDir
+    set undofile
+endif
+
 " ================ Plugins ==========================
 
 source $DOTFILES_INSTALL_DIR/.vim/tmux_navigator.vim " Allow vim and tmux splits to be switched between effortlessly
