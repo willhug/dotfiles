@@ -17,3 +17,9 @@ source $DOTFILES_INSTALL_DIR/shared_shell_setup
 # Load the zsh prompt setup
 
 source $DOTFILES_INSTALL_DIR/zsh_prompt
+
+# Load local settings
+if [ -e "$HOME/.zsh_local" ]
+then
+  source $HOME/.zsh_local
+fi
