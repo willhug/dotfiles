@@ -2,4 +2,4 @@
 #Shared bash and ZSH commands
 export GOPATH=$HOME/go_workspace
 export PATH=$PATH:$GOPATH/bin
-alias lg='git lg'
+alias lg='git lg | head -30'
