@@ -3,3 +3,6 @@
 export GOPATH=$HOME/go_workspace
 export PATH=$PATH:$GOPATH/bin
 alias lg='git lg | head -30'
+
+# Disable Ctrl-D as automatic exit from shell
+set -o ignoreeof
