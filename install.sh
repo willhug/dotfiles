@@ -29,3 +29,5 @@ for dotfile in $dotfiles; do
     echo "Creating symlink to $dotfile in home directory."
     ln -s $dir/.$dotfile ~/.$dotfile
 done
+
+source $dir/install_packages.sh
