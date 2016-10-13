@@ -77,4 +77,4 @@ endif
 
 " ================ Plugins ==========================
 
-source $DOTFILES_INSTALL_DIR/.vim/tmux_navigator.vim " Allow vim and tmux splits to be switched between effortlessly
+source $DOTFILES_INSTALL_DIR/vim/tmux_navigator.vim " Allow vim and tmux splits to be switched between effortlessly
