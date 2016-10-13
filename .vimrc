@@ -2,6 +2,21 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" ================ Setup Vundle Package management ==================
+
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" Default Vundle package (it manages itself), required
+Plugin 'VundleVim/Vundle.vim'
+
+" Put Vundle Packages here
+Plugin 'rust-lang/rust.vim'
+Plugin 'fatih/vim-go'
+
+call vundle#end()
+filetype plugin indent on
+
 " ================ General Config ====================
 
 set number                      "Line numbers are good

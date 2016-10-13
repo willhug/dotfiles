@@ -31,3 +31,4 @@ for dotfile in $dotfiles; do
 done
 
 source $dir/install_packages.sh
+source $dir/install_vim_packages.sh
