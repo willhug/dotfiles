@@ -1,7 +1,4 @@
-# Smart AutoCompletion
-autoload -Uz compinit
-compinit
-
+################# Prerequisites #################
 # Get the current install directory (For running scripts)
 SOURCE="${(%):-%N}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
@@ -11,17 +8,30 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 export DOTFILES_INSTALL_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-# Increase the history size
-HISTSIZE=130000 SAVEHIST=130000
+################# Smart AutoCompletion #################
+autoload -Uz compinit
+compinit
 
-# Load shared shell setup
+################# COMMAND HISTORY ##################
+HISTSIZE=130000            # How many lines of history to keep in memory
+SAVEHIST=130000            # Number of history entries to save to disk
+HISTFILE=~/.zsh_history    # Where to save history to disk
+setopt extended_history    # Store extra information on history entries
+setopt hist_expire_dups_first # Clear out duplicate events first
+setopt hist_ignore_dups    # Ignore duplication command history list
+setopt hist_ignore_space   # Ignore commands that start with a space
+setopt hist_verify         # Don't execute history expansion commands immediately, allow user to edit
+setopt append_history      # Append history to the history file (no overwriting)
+setopt share_history       # Share history across terminals
+setopt inc_append_history  # Immediately append to the history file, not just when a term is killed
+
+################# Load shared shell setup ##################
 source $DOTFILES_INSTALL_DIR/shared_shell_setup
 
-# Load the zsh prompt setup
-
+################# Load the zsh prompt setup ##################
 source $DOTFILES_INSTALL_DIR/zsh_prompt
 
-# Load local settings
+################# Load local settings ##################
 if [ -e "$HOME/.zsh_local" ]
 then
   source $HOME/.zsh_local
