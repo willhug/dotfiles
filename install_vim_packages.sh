@@ -14,3 +14,8 @@ if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
 fi
 
 vim +PluginInstall +qall
+
+# Some packages require setup after vim has installed them
+
+# Install YouCompleteMe
+python ~/.vim/bundle/YouCompleteMe/install.py --racer-completer --gocode-completer

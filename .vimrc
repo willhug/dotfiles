@@ -11,7 +11,14 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Put Vundle Packages here
+
+" Autocompletion
+Plugin 'Valloric/YouCompleteMe'
+
+" Rust
 Plugin 'rust-lang/rust.vim'
+
+" Golang
 Plugin 'fatih/vim-go'
 
 call vundle#end()
