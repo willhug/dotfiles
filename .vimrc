@@ -73,6 +73,10 @@ set hlsearch        " Highlight searches by default
 set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
 
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+nnoremap <silent> <C-c> :nohl<CR>
+
+
 " ================ Persistent Undo ======================
 
 let vimDir = '$HOME/.vim_local'
