@@ -6,7 +6,7 @@
 
 ########## VARIABLES ##########
 
-# Gets the directory this script is stored in (with the other dotfiles)
+# Gets the directory of the dotfiles script
 dotfile_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd ../dotfiles && pwd )"
 
 # old dotfiles backup directory

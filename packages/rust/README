@@ -1,0 +1,6 @@
+Package for setting up rust development (from scratch)
+
+- Downloads core rust (if not installed) rustc, cargo
+- Installs rusty-tags for ctag support in vim
+- Downloads the rust source code (to use with rusty-tags)
+- Installs rust-lang/rust.vim (done directly in the vimrc through Vundle right now)

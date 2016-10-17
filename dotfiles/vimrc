@@ -15,7 +15,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Autocompletion
 Plugin 'Valloric/YouCompleteMe'
 
-" Rust
+" Rust TODO See if we can remove this into the rust package
 Plugin 'rust-lang/rust.vim'
 
 " Golang

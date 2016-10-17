@@ -1,7 +1,11 @@
 #! /bin/sh
 #Shared bash and ZSH commands
+
+# Setup go executables
 export GOPATH=$HOME/go_workspace
 export PATH=$PATH:$GOPATH/bin
+
+# Shorthand command for viewing git logs
 alias lg='git lg | head -30'
 
 # Disable Ctrl-D as automatic exit from shell
@@ -12,4 +16,12 @@ if hash fasd 2>/dev/null; then
   eval "$(fasd --init auto)"
 
   alias v='f -e vim' # quick opening files with vim
+fi
+
+# run package shell scripts
+if [ -d ~/.dotfile-packages/shellrcs ]; then
+  for f in ~/.dotfile-packages/shellrcs/*
+  do
+    source $f
+  done
 fi
