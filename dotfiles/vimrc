@@ -101,6 +101,12 @@ if has('persistent_undo') " has persistent undo installed
     set undofile
 endif
 
+" ================ Swap Files ==========================
+
+" Put swap files in a specific directory so they don't clutter everything
+set swapfile
+set dir=~/.swp-tmp
+
 " ================ Plugins ==========================
 
 source $DOTFILES_INSTALL_DIR/vim/tmux_navigator.vim " Allow vim and tmux splits to be switched between effortlessly

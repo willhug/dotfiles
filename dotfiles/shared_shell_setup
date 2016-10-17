@@ -11,6 +11,9 @@ alias lg='git lg | head -30'
 # Disable Ctrl-D as automatic exit from shell
 set -o ignoreeof
 
+# Ensure the vim swap directory exists
+mkdir -p ~/.swp-tmp
+
 # if fasd is installed, set it up
 if hash fasd 2>/dev/null; then
   eval "$(fasd --init auto)"
