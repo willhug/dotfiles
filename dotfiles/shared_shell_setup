@@ -1,10 +1,6 @@
 #! /bin/sh
 #Shared bash and ZSH commands
 
-# Setup go executables
-export GOPATH=$HOME/go_workspace
-export PATH=$PATH:$GOPATH/bin
-
 # Shorthand command for viewing git logs
 alias lg='git lg | head -30'
 
