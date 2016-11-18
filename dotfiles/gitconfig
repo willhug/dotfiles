@@ -65,6 +65,7 @@
   ps = push                         # push
 
   # rebase
+  ra = rebase --abort               # abort rebase
   rc = rebase --continue            # continue rebase
   rs = rebase --skip                # skip rebase
   rom = rebase origin/master
@@ -118,7 +119,7 @@
   default = upstream
 [core]
   autocrlf = false
-  editor = vim
+	editor = vim
 	excludesfile = ~/.gitignore_global
 [advice]
   statusHints = false
