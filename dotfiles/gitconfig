@@ -137,3 +137,5 @@
 [user]
 	name = Will Hughes
 	email = willhughes01@gmail.com
+[include]
+  path = ~/.gitconfig_local
