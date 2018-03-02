@@ -139,3 +139,10 @@
 	email = willhughes01@gmail.com
 [include]
   path = ~/.gitconfig_local
+[http "https://gopkg.in"]
+	followRedirects = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

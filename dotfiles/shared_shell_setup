@@ -24,3 +24,16 @@ if [ -d ~/.dotfile-packages/shellrcs ]; then
     source $f
   done
 fi
+
+docker_cleanup() {
+  docker rm -f $(docker ps -a -q | xargs)
+  docker rmi $(docker images -a -q -f dangling=true | xargs)
+}
+
+docker_cleanup_safe() {
+  docker rm $(docker ps -a -q -f status=exited | xargs)
+  docker rmi $(docker images -a -q -f dangling=true | xargs)
+}
+
+alias dc="docker_cleanup"
+alias dcs="docker_cleanup_safe"
