@@ -36,3 +36,9 @@ if [ -e "$HOME/.zsh_local" ]
 then
   source $HOME/.zsh_local
 fi
+
+
+# SETUP VIM CLI!!!
+bindkey -v
+bindkey '^R' history-incremental-search-backward
+bindkey '^?' backward-delete-char
