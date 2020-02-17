@@ -1,8 +1,11 @@
 #! /bin/sh
 #Shared bash and ZSH commands
 
+export NODE_VERSION=`jq '.engines.node' ~/co/backend/package.json | tr -d '"'`
+export PATH=~/co/backend/opt/node$NODE_VERSION/bin:$PATH
+
 # Shorthand command for viewing git logs
-alias lg='git lg | head -30'
+alias lg='git lg -n30'
 
 # Disable Ctrl-D as automatic exit from shell
 set -o ignoreeof

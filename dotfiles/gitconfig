@@ -52,7 +52,8 @@
 
   # log
   l = log --graph --date=short
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(bold yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches --remotes HEAD
+  lgold = log --color --graph --pretty=format:'%Cred%h%Creset -%C(bold yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches --remotes HEAD
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(bold yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches=wh/* --branches=master --remotes=*/wh/* --remotes=*/master HEAD  --decorate-refs-exclude=tags/*
   changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
   short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
   simple = log --pretty=format:\" * %s\"
@@ -79,6 +80,8 @@
   uncommit = reset --soft HEAD^     # go back before last commit, with files in uncommitted state
   filelog = log -u                  # show changes to a file
   mt = mergetool                    # fire up the merge tool
+
+  gitfix='git rebase origin/master --exec "git commit --amend --reset-author --no-edit"'
 
   # stash
   ss = stash                        # stash changes
@@ -139,3 +142,12 @@
 	email = willhughes01@gmail.com
 [include]
   path = ~/.gitconfig_local
+[branch "master"]
+	rebase = true
+[merge "ours"]
+	driver = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
