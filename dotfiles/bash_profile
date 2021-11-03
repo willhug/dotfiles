@@ -11,3 +11,4 @@ INSTALL_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
 # Use the bashrc as the source of truth
 source $INSTALL_DIR/.bashrc
+. "$HOME/.cargo/env"
