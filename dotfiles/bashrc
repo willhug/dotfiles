@@ -12,3 +12,4 @@ source $DOTFILES_INSTALL_DIR/shared_shell_setup
 
 # Load bash prompt
 source $DOTFILES_INSTALL_DIR/bash_prompt
+. "$HOME/.cargo/env"
