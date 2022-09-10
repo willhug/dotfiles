@@ -4,25 +4,26 @@ set nocompatible
 
 " ================ Setup Vundle Package management ==================
 
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" TODO look into Vundle again?
+"filetype off
+"set rtp+=~/.vim/bundle/Vundle.vim
+"call vundle#begin()
 " Default Vundle package (it manages itself), required
-Plugin 'VundleVim/Vundle.vim'
+"Plugin 'VundleVim/Vundle.vim'
 
 " Put Vundle Packages here
 
 " Autocompletion
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 " Rust TODO See if we can remove this into the rust package
-Plugin 'rust-lang/rust.vim'
+"Plugin 'rust-lang/rust.vim'
 
 " Golang
-Plugin 'fatih/vim-go'
+"Plugin 'fatih/vim-go'
 
-call vundle#end()
-filetype plugin indent on
+"call vundle#end()
+"filetype plugin indent on
 
 " ================ General Config ====================
 

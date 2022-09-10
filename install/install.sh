@@ -9,4 +9,5 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 source $dir/install_dotfiles.sh
 source $dir/install_packages.sh
-source $dir/install_vim_packages.sh
+# no vim packages for now.
+# source $dir/install_vim_packages.sh
